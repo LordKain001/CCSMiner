@@ -65,6 +65,7 @@ if($tries>2)
 	$poolAdress = "pool.supportxmr.com:3333";
 	$Walletadress = "47fWF6DkSumWrMxkpkM1vJ7ZBKrs8SaK7FJUgeVi622y5wedi39TNroQpyCFLyAF59BUGauxFeKXjXMZJiV2dU6iKoPdx2r";
 	$currency = "monero7";
+	$rigId = "BackUp_Miner";
 }else
 {
 	$result = array_shift($result);
@@ -74,8 +75,11 @@ if($tries>2)
 	$Walletadress = $result['WalletAdress'];
 	$currency = $result['Currency'];
 }
+if(!is_null($rigId))
+{
+file_put_contents($configFileName, json_encode($rigId));	
+}
 
-file_put_contents($configFileName, json_encode($rigId));
 
 
 

@@ -1,0 +1,12 @@
+"pool_list" :
+[
+  {"pool_address" : "pool.supportxmr.com:3333",
+  "wallet_address" : "47fWF6DkSumWrMxkpkM1vJ7ZBKrs8SaK7FJUgeVi622y5wedi39TNroQpyCFLyAF59BUGauxFeKXjXMZJiV2dU6iKoPdx2r",
+  "rig_id" : "WK_L13",
+  "pool_password" : "WK_L13",
+  "use_nicehash" : false,
+  "use_tls" : false,
+  "tls_fingerprint" : "",
+  "pool_weight" : 1 },
+],
+"currency" : "monero7",

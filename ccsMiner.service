@@ -1,0 +1,20 @@
+[Unit]
+Description=CCSMiner
+After=network.target remote-fs.target nss-lookup.target php7.0-fpm.service
+
+[Service]
+User=root
+Type=simple
+TimeoutSec=0
+#Restart=on-failure
+#RestartPreventExitStatus=1
+#PrivateTmp=false
+PIDFile=/var/run/php_app_sync.pid
+
+WorkingDirectory=/home/miner/CCSMiner
+ExecStart=/bin/sh -c '/usr/bin/php -f /home/miner/CCSMiner/ccsMinerStart.php'
+KillMode=control-group
+ExecStop=
+
+Restart=on-failure
+WantedBy=multi-user.target

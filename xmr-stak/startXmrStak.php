@@ -89,7 +89,7 @@ $pooldata = '"pool_list" :
   "wallet_address" : "'. $Walletadress . '",
   "rig_id" : "'. $rigId . '",
   "pool_password" : "'. $rigId . '",
-  "use_nicehash" : false,
+  "use_nicehash" : true,
   "use_tls" : false,
   "tls_fingerprint" : "",
   "pool_weight" : 1 },

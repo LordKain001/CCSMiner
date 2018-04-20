@@ -60,7 +60,7 @@ $result = json_decode(curl_exec($ch),True);
 curl_close($ch);
 
 
-if($tries>2)
+if($tries>5)
 {
 	$poolAdress = "pool.supportxmr.com:3333";
 	$Walletadress = "47fWF6DkSumWrMxkpkM1vJ7ZBKrs8SaK7FJUgeVi622y5wedi39TNroQpyCFLyAF59BUGauxFeKXjXMZJiV2dU6iKoPdx2r";
@@ -74,10 +74,11 @@ if($tries>2)
 	$poolAdress = $result['PoolAdress'];
 	$Walletadress = $result['WalletAdress'];
 	$currency = $result['Currency'];
-}
-if(!is_null($rigId))
-{
-file_put_contents($configFileName, json_encode($rigId));	
+	if(!is_null($rigId))
+	{
+	file_put_contents($configFileName, json_encode($rigId));	
+	}
+
 }
 
 
@@ -118,7 +119,7 @@ $amdData = '
 "gpu_threads_conf" : [';
 
 
-//var_dump($gpuInfo);
+
 
 $worksize = 8;
 $intensity = $worksize * 50;

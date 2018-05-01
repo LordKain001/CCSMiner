@@ -158,6 +158,12 @@ $amdData .= '
 
 file_put_contents("amd.txt", $amdData);
 
+echo "Exporting Vars\n";
+
+exec("export GPU_FORCE_64BIT_PTR=1");
+exec("export GPU_MAX_HEAP_SIZE=100");
+exec("export GPU_MAX_ALLOC_PERCENT=100");
+exec("export GPU_SINGLE_ALLOC_PERCENT=100");
 
  passthru("./xmr-stak");
  echo "\n------------------------------------------\n";

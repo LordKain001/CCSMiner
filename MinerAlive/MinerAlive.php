@@ -3,9 +3,10 @@
 $configFileName = '../config.json';
 
 echo "------------------------------------------------------------------------------------------------\n";
-echo "---------------------------------------start of script------------------------------------------\n";
+echo "---------------------------------------Alive----------------------------------------------------\n";
 echo "------------------------------------------------------------------------------------------------\n";
-
+while(1)
+{
 	//check for Reset
 	//If it cant pass the whole script the Error count will increase(2 times wirte on file)
 	$file = './Status.php';
@@ -43,7 +44,9 @@ echo "--------------------------------------------------------------------------
 	{
 		$minerName = NULL;
 	}
-	$scriptVersion = '1.1';
+
+
+	$scriptVersion = array_shift(preg_split('/\s+/',file_get_contents('../.git/FETCH_HEAD')));
 
 
 	$mininglog = explode("\n",$mininglog);
@@ -98,5 +101,5 @@ echo "--------------------------------------------------------------------------
 
 	file_put_contents($file, json_encode($status));
 
-
+}
 ?>

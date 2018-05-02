@@ -44,7 +44,7 @@ echo "--------------------------------------------------------------------------
 		$minerName = NULL;
 	}
 
-	$scriptVersion = exec('git rev-parse HEAD');
+	$scriptVersion = exec('git rev-parse --short HEAD');
 	//$scriptVersion = getGitBranch();
 	//$scriptVersion = array_shift(preg_split('/\s+/',file_get_contents('../.git/FETCH_HEAD')));
 	//var_dump($scriptVersion);

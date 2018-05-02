@@ -29,7 +29,7 @@ $xmrStakProcess = array(
 	);
 	
 $xmrStakProcess["resource"] = proc_open($xmrStakProcess["process"], $xmrStakProcess["descriptorspec"], $xmrStakProcess["pipes"], $xmrStakProcess["directory"], $env );	
-//var_dump($xmrStakProcess);	
+var_dump($xmrStakProcess);	
 echo "xmr-stak Fork Succes\n";
 
 
@@ -47,62 +47,27 @@ $minerAliveProcess = array(
 	);
 
 $minerAliveProcess["resource"] = proc_open($minerAliveProcess["process"], $minerAliveProcess["descriptorspec"], $minerAliveProcess["pipes"], $minerAliveProcess["directory"], $env );	
-//var_dump($minerAliveProcess);	
+var_dump($minerAliveProcess);	
 echo "Miner Alive Fork Succes\n";
 
 
-
-/*
-
-$childPids = array();
-
-$pid = pcntl_fork();
-if ($pid == -1) {   //fork failed. May be extreme OOM condition
-		die('pcntl_fork failed');
-	} elseif ($pid) {   //parent process                
-		$childPids[] = $pid;
-		chdir("MinerAlive");
-	} else {            //child process                
-		echo "xmr-stak Fork start\n";
-		chdir("xmr-stak");
-		passthru("sudo php ./startXmrStak.php");
-		echo "xmr-stak Fork Succes\n";
-		
-	}
-*/
-/*
-$pid = pcntl_fork();
-if ($pid == -1) {   //fork failed. May be extreme OOM condition
-		die('pcntl_fork failed');
-	} elseif ($pid) {   //parent process                
-		$childPids[] = $pid;
-	} else {            //child process                
-		echo "MinerAlive Fork start $minerAlivePid\n";	
-		chdir("MinerAlive");
-		passthru("php ./MinerAlive.php");
-		echo "Miner Alive Fork Succes\n";	
-		
-	}
-*/
-
 		
 while (1) {
+	 sleep(5);
    
-	
-
-  	$minerAliveProcess["resource"] = proc_open($minerAliveProcess["process"], $minerAliveProcess["descriptorspec"], $minerAliveProcess["pipes"], $minerAliveProcess["directory"], $env );	
 	echo "\n------------------------------------------\n";
 	echo "---------------alive----------------------\n";
 	echo "------------------------------------------\n";
 
-
+$minerAliveProcess["resource"] = proc_open($minerAliveProcess["process"], $minerAliveProcess["descriptorspec"], $minerAliveProcess["pipes"], $minerAliveProcess["directory"], $env );
 if (is_resource($minerAliveProcess["resource"])) {
     // $pipes now looks like this:
     // 0 => writeable handle connected to child stdin
     // 1 => readable handle connected to child stdout
     // Any error output will be appended to /tmp/error-output.txt
 	$pipes = $minerAliveProcess["pipes"];
-	echo stream_get_contents($pipes[1], 400);// read from the pipe 
+	stream_set_blocking($pipes[1], FALSE);
+	echo stream_get_contents($pipes[1]);// read from the pipe 
 
     
 }else
@@ -112,7 +77,8 @@ if (is_resource($minerAliveProcess["resource"])) {
 
 
 
-echo "\n------------------------------------------\n";
+
+	echo "\n------------------------------------------\n";
 	echo "---------------xmr-stak:----------------------\n";
 	echo "------------------------------------------\n";
 
@@ -123,7 +89,18 @@ echo "\n------------------------------------------\n";
     // Any error output will be appended to /tmp/error-output.txt
 	
 	$pipes = $xmrStakProcess["pipes"];
-	echo stream_get_contents($pipes[1], 500);// read from the pipe 
+	
+	//stream_set_timeout($pipes[1], 2);
+	stream_set_blocking($pipes[1], FALSE);
+
+	fwrite($pipes[0], "h");
+	fwrite($pipes[0], "c");
+	fwrite($pipes[0], "r");
+	sleep(1);
+    echo stream_get_contents($pipes[1]);// read from the pipe 
+
+    
+
 
 }else
  {
@@ -139,7 +116,7 @@ echo "\n------------------------------------------\n";
  	echo "\n------------------------------------------\n";
 	echo "---------------sleep----------------------\n";
 	echo "------------------------------------------\n";
-  	//sleep(10);
+  	sleep(5);
 }
 
 ?>

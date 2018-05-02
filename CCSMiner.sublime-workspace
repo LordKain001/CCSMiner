@@ -3,10 +3,36 @@
 	{
 		"selected_items":
 		[
+			[
+				"strea_se",
+				"stream_set_blocking"
+			],
+			[
+				"scrip",
+				"scriptversion"
+			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006993/ccsMinerStart.php",
+			"settings":
+			{
+				"buffer_size": 3163,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006f57/MinerAlive.php",
+			"settings":
+			{
+				"buffer_size": 2839,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -40,10 +66,21 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Mike/Documents/GitHub/CCSMiner"
+		"/C/Users/Mike/Documents/GitHub/CCSMiner",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/MinerAlive"
 	],
 	"file_history":
 	[
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv00633c/ccsMinerStart.php",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/MinerAlive/MinerAlive.php",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/index",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/HEAD",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/description",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/config",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/FETCH_HEAD",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/ccsMinerStart.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv0059cb/MinerAlive.php",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/CCSMiner.sublime-project"
 	],
 	"find":
 	{
@@ -78,8 +115,66 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006993/ccsMinerStart.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3163,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								3163
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 570.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006f57/MinerAlive.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2839,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2836,
+								2836
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1215.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -160,7 +255,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 419.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

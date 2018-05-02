@@ -45,7 +45,7 @@ echo "--------------------------------------------------------------------------
 	}
 
 	$scriptVersion = array_shift(preg_split('/\s+/',file_get_contents('../.git/FETCH_HEAD')));
-	var_dump($scriptVersion);
+	//var_dump($scriptVersion);
 
 
 

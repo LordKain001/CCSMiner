@@ -66,9 +66,10 @@ if (is_resource($minerAliveProcess["resource"])) {
     // 1 => readable handle connected to child stdout
     // Any error output will be appended to /tmp/error-output.txt
 	$pipes = $minerAliveProcess["pipes"];
-	stream_set_blocking($pipes[1], FALSE);
-	echo stream_get_contents($pipes[1]);// read from the pipe 
+	stream_set_blocking($pipes[1], TRUE);
 
+	echo stream_get_contents($pipes[1]);// read from the pipe 
+	unset($pipes);
     
 }else
  {
@@ -99,7 +100,7 @@ if (is_resource($minerAliveProcess["resource"])) {
 	sleep(1);
     echo stream_get_contents($pipes[1]);// read from the pipe 
 
-    
+    unset($pipes);
 
 
 }else

@@ -16,21 +16,37 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006993/ccsMinerStart.php",
+			"file": "MinerAlive/MinerAlive.php",
 			"settings":
 			{
-				"buffer_size": 3163,
+				"buffer_size": 2841,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ccsMinerStart.php",
+			"settings":
+			{
+				"buffer_size": 3193,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006f57/MinerAlive.php",
+			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv0007f1/packed-refs",
 			"settings":
 			{
-				"buffer_size": 2839,
-				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
+				"buffer_size": 107,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv000815/config",
+			"settings":
+			{
+				"buffer_size": 264,
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -71,6 +87,9 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv00738d/MinerAlive.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006993/ccsMinerStart.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006f57/MinerAlive.php",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv00633c/ccsMinerStart.php",
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/MinerAlive/MinerAlive.php",
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/index",
@@ -115,52 +134,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006993/ccsMinerStart.php",
+					"file": "MinerAlive/MinerAlive.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3163,
+						"buffer_size": 2841,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								3163
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 570.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv006f57/MinerAlive.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2839,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2836,
-								2836
+								1962,
+								1962
 							]
 						],
 						"settings":
@@ -169,10 +160,94 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1215.0,
+						"translation.y": 535.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ccsMinerStart.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3193,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3184,
+								3184
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1035.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv0007f1/packed-refs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 107,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv000815/config",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 264,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
 					"type": "text"
 				}
 			]

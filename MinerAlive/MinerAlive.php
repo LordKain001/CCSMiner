@@ -44,7 +44,9 @@ echo "--------------------------------------------------------------------------
 		$minerName = NULL;
 	}
 
-	$scriptVersion = array_shift(preg_split('/\s+/',file_get_contents('../.git/FETCH_HEAD')));
+	$scriptVersion = exec('git rev-parse HEAD');
+	//$scriptVersion = getGitBranch();
+	//$scriptVersion = array_shift(preg_split('/\s+/',file_get_contents('../.git/FETCH_HEAD')));
 	//var_dump($scriptVersion);
 
 
@@ -101,5 +103,18 @@ echo "--------------------------------------------------------------------------
 
 	file_put_contents($file, json_encode($status));
 
+exit;
 
+function getGitBranch()
+{
+    $shellOutput = [];
+    exec('git branch | ' . "grep ' * '", $shellOutput);
+    foreach ($shellOutput as $line) {
+        if (strpos($line, '* ') !== false) {
+            return trim(strtolower(str_replace('* ', '', $line)));
+        }
+    }
+    return null;
+}
 ?>
+

@@ -53,7 +53,7 @@ echo "Miner Alive Fork Succes\n";
 
 		
 while (1) {
-	 sleep(5);
+	sleep(60);
    
 	echo "\n------------------------------------------\n";
 	echo "---------------alive----------------------\n";

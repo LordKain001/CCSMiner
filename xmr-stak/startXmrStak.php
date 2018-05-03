@@ -122,7 +122,7 @@ $amdData = '
 
 
 $worksize = 8;
-$intensity = $worksize * 50;
+$intensity = $worksize * 63;
 $counter = 0;
 foreach ($gpuInfo as $value) {
   $amdData .= '

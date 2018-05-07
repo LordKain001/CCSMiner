@@ -3,21 +3,25 @@
 $tries = 0;
 while(1)
 {
-echo "Starting to configure XMR-Stak";
-var_dump($tries);
+echo "Starting to configure XMR-Stak: $tries \n";
 
-$configFileName = '../config.json';
+$configFile = '../config.json';
 
-if (file_exists($configFileName)) 
+
+if (file_exists($configFile))
 {
-	$rigId = json_decode(file_get_contents($configFileName), TRUE);
+	$config = json_decode(file_get_contents($configFile), TRUE);	
 }else
 {
-	$rigId = NULL;
+	$config = array(
+		"minerName" => NULL,
+		"installStatus" => 4,
+	);
+
+
 }
 
-
-var_dump($rigId);
+var_dump($config["miner"]);
 
 $ipAdress = array_shift(preg_split("/\\r\\n|\\r|\\n/",shell_exec("/sbin/ifconfig | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'")));
   
@@ -70,14 +74,15 @@ if($tries>5)
 {
 	$result = array_shift($result);
 	var_dump($result);
-	$rigId = $result['MinerId'];
+	//$rigId = $result['MinerId'];
 	$poolAdress = $result['PoolAdress'];
 	$Walletadress = $result['WalletAdress'];
 	$currency = $result['Currency'];
-	if(!is_null($rigId))
+	/*if(!is_null($rigId))
 	{
 	file_put_contents($configFileName, json_encode($rigId));	
 	}
+	*/
 
 }
 

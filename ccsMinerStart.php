@@ -16,19 +16,20 @@ $configFile = "config.json";
 $config = NULL;
 
 if (file_exists($configFile))
-	{
-		$config = json_decode(file_get_contents($configFile), TRUE);	
-	}else
-	{
-		$config = array(
-			"minerName" => "",
-			"installStatus" => 1,
-		);
+{
+	$config = json_decode(file_get_contents($configFile), TRUE);	
+}else
+{
+	$config = array(
+		"minerName" => "",
+		"installStatus" => 1,
+	);
 
-		echo"Enter Miner-ID:";
-		$config["minerName"] = trim(fgets(STDIN)); // reads one line from STDIN
-		file_put_contents($configFile, json_encode($config));
-	}
+	echo"Enter Miner-ID:";
+	$config["minerName"] = trim(fgets(STDIN)); // reads one line from STDIN
+	file_put_contents($configFile, json_encode($config));
+}
+
 
 
 

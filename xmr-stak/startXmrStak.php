@@ -21,7 +21,7 @@ if (file_exists($configFile))
 
 }
 
-var_dump($config["miner"]);
+var_dump($config["minerName"]);
 
 $ipAdress = array_shift(preg_split("/\\r\\n|\\r|\\n/",shell_exec("/sbin/ifconfig | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'")));
   
@@ -40,7 +40,7 @@ $ch = curl_init($url);
 
 //The JSON data.
 $jsonData = array(
-'minerUid' => $rigId,
+'minerUid' => $config["minerName"],
 'ipAdress' => $ipAdress,
 );
  

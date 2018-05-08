@@ -1,6 +1,6 @@
 
 <?php
-$configFileName = '../config.json';
+$configFile = '../config.json';
 
 echo "------------------------------------------------------------------------------------------------\n";
 echo "---------------------------------------Alive----------------------------------------------------\n";
@@ -38,12 +38,12 @@ echo "--------------------------------------------------------------------------
 	$uptime = exec("uptime -p");
 
 	//script Data filled by user
-	if (file_exists($configFileName)) 
+	if (file_exists($configFile)) 
 	{
-		$minerName = json_decode(file_get_contents($configFileName), TRUE);
+		$config = json_decode(file_get_contents($configFile), TRUE);
 	}else
 	{
-		$minerName = NULL;
+		$config["minerName"] = NULL;
 	}
 
 	$scriptVersion = exec('git rev-parse --short HEAD');
@@ -67,7 +67,7 @@ echo "--------------------------------------------------------------------------
 	//The JSON data.
 	$jsonData = array(
 		'scriptversion' => $scriptVersion,
-		'name' => $minerName,
+		'name' => $config["minerName"],
 		'hostname' => $hostName,
 		'gpuInfo' => $gpuInfo,
 		'ipAdress' => $ipAdress,

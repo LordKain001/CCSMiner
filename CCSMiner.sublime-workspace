@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"scri",
+				"scriptVersion"
+			],
+			[
 				"strea_se",
 				"stream_set_blocking"
 			],
@@ -19,7 +23,7 @@
 			"file": "MinerAlive/MinerAlive.php",
 			"settings":
 			{
-				"buffer_size": 2841,
+				"buffer_size": 3231,
 				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
@@ -34,7 +38,10 @@
 			}
 		},
 		{
+			"contents": "# pack-refs with: peeled fully-peeled \n94e6ce2c9ba4b7bfa70471a6a0640e2c840f6aac refs/remotes/origin/master\n",
 			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv0007f1/packed-refs",
+			"file_size": 107,
+			"file_write_time": 131697611540000000,
 			"settings":
 			{
 				"buffer_size": 107,
@@ -42,7 +49,10 @@
 			}
 		},
 		{
+			"contents": "[core]\n\trepositoryformatversion = 0\n\tfilemode = true\n\tbare = false\n\tlogallrefupdates = true\n[remote \"origin\"]\n\turl = https://github.com/LordKain001/CCSMiner\n\tfetch = +refs/heads/*:refs/remotes/origin/*\n[branch \"master\"]\n\tremote = origin\n\tmerge = refs/heads/master\n",
 			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv000815/config",
+			"file_size": 264,
+			"file_write_time": 131697611540000000,
 			"settings":
 			{
 				"buffer_size": 264,
@@ -134,7 +144,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -143,15 +153,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2841,
+						"buffer_size": 3231,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1962,
-								1962
+								0,
+								3231
 							]
 						],
 						"settings":
@@ -160,10 +170,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 535.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -188,10 +198,10 @@
 							"syntax": "Packages/PHP/PHP.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1035.0,
+						"translation.y": 315.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -219,7 +229,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -247,7 +257,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]

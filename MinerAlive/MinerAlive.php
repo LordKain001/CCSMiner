@@ -20,6 +20,7 @@ echo "--------------------------------------------------------------------------
 	if($status["errors"] >= 10)
 	{
 		$status["errors"] = 0;
+		$status["sucess"] = 0;
 		file_put_contents($file, json_encode($status));
 		shell_exec("echo s | sudo tee /proc/sysrq-trigger");
 		shell_exec("echo b | sudo tee /proc/sysrq-trigger");
@@ -34,6 +35,7 @@ echo "--------------------------------------------------------------------------
 	$Timestamp = shell_exec('date');
 	$temperature = shell_exec('sensors');
 	$hostName = shell_exec('hostname');
+	$uptime = exec("uptime -p");
 
 	//script Data filled by user
 	if (file_exists($configFileName)) 
@@ -72,6 +74,7 @@ echo "--------------------------------------------------------------------------
 		'mininglog' => $mininglog,
 		'Timestamp' => $Timestamp,
 		'Sensors' => $temperature,
+		"uptime" => $uptime,
 	);
 	 
 	//Encode the array into JSON.

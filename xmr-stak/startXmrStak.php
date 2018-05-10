@@ -18,7 +18,6 @@ if (file_exists($configFile))
 		"installStatus" => 4,
 	);
 
-
 }
 
 var_dump($config["minerName"]);
@@ -69,20 +68,36 @@ if($tries>5)
 	$poolAdress = "pool.supportxmr.com:3333";
 	$Walletadress = "47fWF6DkSumWrMxkpkM1vJ7ZBKrs8SaK7FJUgeVi622y5wedi39TNroQpyCFLyAF59BUGauxFeKXjXMZJiV2dU6iKoPdx2r";
 	$currency = "monero7";
-	$rigId = "BackUp_Miner";
+	$minerId = "BackUp_Miner";
+	$multipleIntesity = 50;
 }else
 {
 	$result = array_shift($result);
 	var_dump($result);
-	//$rigId = $result['MinerId'];
-	$poolAdress = $result['PoolAdress'];
-	$Walletadress = $result['WalletAdress'];
-	$currency = $result['Currency'];
-	/*if(!is_null($rigId))
-	{
-	file_put_contents($configFileName, json_encode($rigId));	
+
+	if (isset($result['MinerId'])) {
+		$minerId = $result['MinerId'];	
 	}
-	*/
+
+	if (isset($result['PoolAdress'])) {
+		$poolAdress = $result['PoolAdress'];	
+	}
+	if (isset($result['WalletAdress'])) {
+		$Walletadress = $result['WalletAdress'];	
+	}
+	if (isset($result['Currency'])) {
+		$currency = $result['Currency'];	
+	}
+	if (isset($result['multipleIntesity'])) {
+		$multipleIntesity = $result['multipleIntesity'];	
+	}else
+	{
+		$multipleIntesity = 50;
+	}
+	
+	
+
+
 
 }
 
@@ -93,8 +108,8 @@ $pooldata = '"pool_list" :
 [
   {"pool_address" : "'. $poolAdress . '",
   "wallet_address" : "'. $Walletadress . '",
-  "rig_id" : "'. $rigId . '",
-  "pool_password" : "'. $rigId . '",
+  "rig_id" : "'. $minerId . '",
+  "pool_password" : "'. $minerId . '",
   "use_nicehash" : true,
   "use_tls" : false,
   "tls_fingerprint" : "",
@@ -108,56 +123,64 @@ $pooldata = '"pool_list" :
 file_put_contents("pools.txt", $pooldata);
 
 
-$gpuInfo = shell_exec('clinfo -l');
-$gpuInfo = explode("\n",$gpuInfo);
 
-
-foreach ($gpuInfo as &$value) {
-   $value = substr($value,12);
-}
-array_pop($gpuInfo);
-array_shift($gpuInfo);
-unset($value);
-$numOfGpu = count($gpuInfo);
 
 $amdData = '
-"gpu_threads_conf" : [';
+	"gpu_threads_conf" : [';
 
-
-
-
-$worksize = 8;
-$intensity = $worksize * 63;
-$counter = 0;
-foreach ($gpuInfo as $value) {
-  $amdData .= '
+if($multipleIntesity >0)
 {
-	"index" : '. $counter .',
-	"intensity" : '.$intensity.',
-	"worksize" : '.$worksize.',
-	"affine_to_cpu" : false,
-	"strided_index" : 1,
-	"mem_chunk" : 2,
-	"comp_mode" : true
-},
-{
-	"index" : '. $counter .',
-	"intensity" : '.$intensity.',
-	"worksize" : '.$worksize.',
-	"affine_to_cpu" : false,
-	"strided_index" : 1,
-	"mem_chunk" : 2,
-	"comp_mode" : true
-},';
-  $counter++;
+
+	$gpuInfo = shell_exec('clinfo -l');
+	$gpuInfo = explode("\n",$gpuInfo);
+
+
+	foreach ($gpuInfo as &$value) 
+	{
+	   $value = substr($value,12);
+	}
+	array_pop($gpuInfo);
+	array_shift($gpuInfo);
+	unset($value);
+	$numOfGpu = count($gpuInfo);
+
+
+
+	$worksize = 8;
+	$intensity = $worksize * $multipleIntesity;
+	$counter = 0;
+
+	
+	foreach ($gpuInfo as $value) {
+	  $amdData .= '
+	{
+		"index" : '. $counter .',
+		"intensity" : '.$intensity.',
+		"worksize" : '.$worksize.',
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"comp_mode" : true
+	},
+	{
+		"index" : '. $counter .',
+		"intensity" : '.$intensity.',
+		"worksize" : '.$worksize.',
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"comp_mode" : true
+	},';
+	  $counter++;
+	}
+	unset($counter,$value);
+
+	
 }
-unset($counter,$value);
-
 $amdData .= '
-],
+	],
 
-"platform_index" : 0,';
-
+	"platform_index" : 0,';
 
 //var_dump($amdData);
 

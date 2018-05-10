@@ -94,11 +94,6 @@ if($tries>5)
 	{
 		$multipleIntesity = 50;
 	}
-	
-	
-
-
-
 }
 
 

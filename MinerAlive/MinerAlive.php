@@ -31,11 +31,11 @@ echo "--------------------------------------------------------------------------
 	$output = shell_exec('ls -lart');
 	$gpuInfo = shell_exec('clinfo -l');
 	$ipAdress = shell_exec("/sbin/ifconfig | grep 'inet addr' | cut -d: -f2 | awk '{print $1}'");
-	$mininglog = shell_exec('journalctl -u xmr-stak.service -n50');
+	$mininglog = shell_exec('journalctl -u ccsMiner.service -n50');
 	$Timestamp = shell_exec('date');
 	$temperature = shell_exec('sensors');
 	$hostName = shell_exec('hostname');
-	$uptime = exec("uptime -p");
+	$uptime = shell_exec("uptime -p");
 
 	//script Data filled by user
 	if (file_exists($configFile)) 
@@ -46,11 +46,22 @@ echo "--------------------------------------------------------------------------
 		$config["minerName"] = NULL;
 	}
 
-	$scriptVersion = exec('git rev-parse --short HEAD');
-	//$scriptVersion = getGitBranch();
-	//$scriptVersion = array_shift(preg_split('/\s+/',file_get_contents('../.git/FETCH_HEAD')));
-	//var_dump($scriptVersion);
 
+//--------------------------
+//Versioning
+//--------------------------
+	echo " get Git verions:\n";
+	exec("git fetch");
+	$versionBehind = explode("\n",shell_exec('git status -sb'));
+	$versionBehind = array_shift($versionBehind);
+	$versionBehind = substr($versionBehind,strrpos($versionBehind, '['));
+
+	$scriptVersion = shell_exec('git rev-parse --short HEAD');
+
+
+//--------------------------
+//Minimg Log
+//--------------------------
 
 
 	$mininglog = explode("\n",$mininglog);
@@ -66,7 +77,7 @@ echo "--------------------------------------------------------------------------
 	 
 	//The JSON data.
 	$jsonData = array(
-		'scriptversion' => $scriptVersion,
+		'scriptversion' => $scriptVersion . $versionBehind,
 		'name' => $config["minerName"],
 		'hostname' => $hostName,
 		'gpuInfo' => $gpuInfo,

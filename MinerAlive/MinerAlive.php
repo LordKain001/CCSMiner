@@ -2,10 +2,6 @@
 <?php
 $configFile = '../config.json';
 
-echo "------------------------------------------------------------------------------------------------\n";
-echo "---------------------------------------Alive----------------------------------------------------\n";
-echo "------------------------------------------------------------------------------------------------\n";
-
 	//check for Reset
 	//If it cant pass the whole script the Error count will increase(2 times wirte on file)
 	$file = './Status.php';
@@ -15,14 +11,21 @@ echo "--------------------------------------------------------------------------
 		echo "Failed";
 	}
 
-	Var_dump($status);
+	
+	echo "\nErrors:" . $status["errors"];
+	echo "\nsuccesses:" . $status["sucess"];
+
 	$status["errors"]++;
 	if($status["errors"] >= 10)
 	{
+		echo "------------------------------------------------------------------------------------------------\n";
+		echo "---------------------------------------Alive Failed---------------------------------------------\n";
+		echo "------------------------------------------------------------------------------------------------\n";
 		$status["errors"] = 0;
 		$status["sucess"] = 0;
 		file_put_contents($file, json_encode($status));
 		shell_exec("echo s | sudo tee /proc/sysrq-trigger");
+		shell_exec("echo U | sudo tee /proc/sysrq-trigger");
 		shell_exec("echo b | sudo tee /proc/sysrq-trigger");
 	}
 	file_put_contents($file, json_encode($status));
@@ -46,21 +49,23 @@ echo "--------------------------------------------------------------------------
 		$config["minerName"] = NULL;
 	}
 
-
+	echo"\nminerName: " . $config["minerName"];
 //--------------------------
 //Versioning
 //--------------------------
-	echo " get Git verions:\n";
+	echo "\nget Git verions:";
 	exec("git fetch");
 	$versionBehind = explode("\n",shell_exec('git status -sb'));
 	$versionBehind = array_shift($versionBehind);
 	$versionBehind = substr($versionBehind,strrpos($versionBehind, '['));
 
-	$scriptVersion = shell_exec('git rev-parse --short HEAD');
+	$scriptVersion = exec('git rev-parse --short HEAD');
 
+
+	echo $scriptVersion . $versionBehind . "\n";
 
 //--------------------------
-//Minimg Log
+//Mining Log
 //--------------------------
 
 
@@ -97,6 +102,9 @@ echo "--------------------------------------------------------------------------
 	 
 	//Attach our encoded JSON string to the POST fields.
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
+
+	//Send echos to return var
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	 
 	//Set the content type to application/json
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
@@ -108,7 +116,7 @@ echo "--------------------------------------------------------------------------
 	}
 	else
 	{
-		echo "Operation ohne Fehler vollständig ausgeführt\n";
+		echo "Server erreicht\n";
 		$status["sucess"]++;
 		$status["errors"] = 0;
 		

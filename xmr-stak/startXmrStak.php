@@ -27,8 +27,6 @@ $ipAdress = array_shift(preg_split("/\\r\\n|\\r|\\n/",shell_exec("/sbin/ifconfig
 shell_exec('rm amd.txt');
 shell_exec('rm pools.txt');
 
-echo "files deleted\n";
-
 //
 //----Pools---
 //

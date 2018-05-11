@@ -33,8 +33,8 @@ if (file_exists($configFile))
 }
 
 
+echo "MinerName: " . $config["minerName"] . "\n";
 
-var_dump($config);
 
 
 switch ($config["installStatus"]) {
@@ -194,7 +194,7 @@ if (is_resource($minerAliveProcess["resource"])) {
 	sleep(1);
 
 	//var_dump($xmrReport);
-	
+
 	$xmrReport = ParsexmrReport($xmrReport);
 
     var_dump($xmrReport["connection"]);

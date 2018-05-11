@@ -106,7 +106,8 @@ function ParsexmrReport($xmrReport)
 		echo "GPU " . $gpus[$i]['ID'] . ": " . $gpus[$i]['10s'] . "H/s AVG:" . $gpus[$i]['AVG'] ."H/s\n";
 	}
 	unset($k,$i);
-	echo "------------------------------------------\n";
+	echo "Total: " . array_sum(array_column($gpus, 'AVG'))/1000 ."kH/s";
+	echo "\n------------------------------------------\n";
 
 	$xmrReport["gpus"] = $gpus;
 

@@ -100,7 +100,7 @@ function ParsexmrReport($xmrReport)
 		array_push($thread,array_slice($xmrReport["amdReport"][$k++],1,3));
 
 		
-		$gpus[$i]["10s"] = $thread[0]["10s"] + $thread[1]["10s"];		
+		$gpus[$i]["10s"] = round($thread[0]["10s"] + $thread[1]["10s"]);		
 		$gpus[$i]["AVG"] = round((array_sum($thread[0]) + array_sum($thread[1])) / count($thread[0]));
 
 		echo "GPU " . $gpus[$i]['ID'] . ": " . $gpus[$i]['10s'] . "H/s AVG:" . $gpus[$i]['AVG'] ."H/s\n";

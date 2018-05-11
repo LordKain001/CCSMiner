@@ -13,6 +13,7 @@ echo "end of Configmanager";
 
 include "xmrParser.php";
 
+passthru("sudo chmod 777 -R ../CCSMiner");
 
 $configFile = "config.json";
 $config = NULL;

@@ -46,7 +46,19 @@ switch ($config["installStatus"]) {
 		{
 			passthru("sudo cp -v ccsMiner.service /etc/systemd/system/multi-user.target.wants");
 		}
+
+
+		passthru('echo "vm.nr_hugepages=128" >> /etc/sysctl.conf');
+		passthru('echo "kernel.panic = 1" >> /etc/sysctl.conf');
+		passthru('echo "kernel.sysrq = 1" >> /etc/sysctl.conf');
+		passthru('sysctl -p');
+
+		passthru('echo "soft memlock 262144" >> /etc/security/limits.conf');
+		passthru('echo "hard memlock 262144" >> /etc/security/limits.conf');
+		
 		break;
+
+
 		
 	case '2':
 		passthru("sudo apt install -y libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev lm-sensors git ssh php php7.0-curl clinfo");
@@ -54,19 +66,13 @@ switch ($config["installStatus"]) {
 		passthru("sudo apt update -y");
 		passthru("sudo apt upgrade -y");
 
-		exec('echo "vm.nr_hugepages=128" >> /etc/sysctl.conf');
-		exec('echo "kernel.panic = 1" >> /etc/sysctl.conf');
-		exec('echo "kernel.sysrq = 1" >> /etc/sysctl.conf');
-		passthru('sysctl -p');
-
-		exec('echo "soft memlock 262144" >> /etc/security/limits.conf');
-		exec('echo "hard memlock 262144" >> /etc/security/limits.conf');
 		break;
 	
 	case '3':
 		passthru("wget --referer=http://support.amd.com https://www2.ati.com/drivers/linux/beta/ubuntu/amdgpu-pro-17.40.2712-510357.tar.xz");
-		exec("tar -Jxvf amdgpu-pro-17.40.2712-510357.tar.xz");
-		exec("sudo chmod 777 -R amdgpu-pro-17.40.2712-510357");
+		passthru("sudo chmod 777 amdgpu-pro-17.40.2712-510357.tar.xz");
+		passthru("tar -Jxvf amdgpu-pro-17.40.2712-510357.tar.xz");
+		passthru("sudo chmod 777 -R amdgpu-pro-17.40.2712-510357");
 		passthru("amdgpu-pro-17.40.2712-510357/amdgpu-pro-install -y --compute");
 	
 	case '4':

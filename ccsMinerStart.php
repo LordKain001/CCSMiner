@@ -11,6 +11,8 @@ echo "end of Configmanager";
 */
 
 
+include "xmrParser.php";
+
 
 $configFile = "config.json";
 $config = NULL;
@@ -32,7 +34,7 @@ if (file_exists($configFile))
 
 
 
-
+var_dump($config);
 
 
 switch ($config["installStatus"]) {
@@ -55,9 +57,8 @@ switch ($config["installStatus"]) {
 
 		passthru('echo "soft memlock 262144" >> /etc/security/limits.conf');
 		passthru('echo "hard memlock 262144" >> /etc/security/limits.conf');
-		
-		break;
 
+		break;
 
 		
 	case '2':
@@ -110,7 +111,7 @@ if ($config["installStatus"]<4) {
 
 $env = array('some_option' => 'aeiou');
 
-echo "xmr-stak Fork start\n";
+echo "xmr-stak start\n";
 
 $xmrStakProcess = array(
 	"process" => "php ./startXmrStak.php",
@@ -121,14 +122,7 @@ $xmrStakProcess = array(
 	);
 	
 $xmrStakProcess["resource"] = proc_open($xmrStakProcess["process"], $xmrStakProcess["descriptorspec"], $xmrStakProcess["pipes"], $xmrStakProcess["directory"], $env );	
-var_dump($xmrStakProcess);	
-echo "xmr-stak Fork Succes\n";
-
-
-
-
-
-echo "MinerAlive Fork start\n";
+//var_dump($xmrStakProcess);	
 
 $minerAliveProcess = array(
 	"process" => "php ./MinerAlive.php",
@@ -138,9 +132,9 @@ $minerAliveProcess = array(
 	"resource" => NULL,
 	);
 
-$minerAliveProcess["resource"] = proc_open($minerAliveProcess["process"], $minerAliveProcess["descriptorspec"], $minerAliveProcess["pipes"], $minerAliveProcess["directory"], $env );	
-var_dump($minerAliveProcess);	
-echo "Miner Alive Fork Succes\n";
+//$minerAliveProcess["resource"] = proc_open($minerAliveProcess["process"], $minerAliveProcess["descriptorspec"], $minerAliveProcess["pipes"], $minerAliveProcess["directory"], $env );	
+//var_dump($minerAliveProcess);	
+//echo "Miner Alive Fork Succes\n";
 
 
 		
@@ -186,13 +180,26 @@ if (is_resource($minerAliveProcess["resource"])) {
 	
 	//stream_set_timeout($pipes[1], 2);
 	stream_set_blocking($pipes[1], FALSE);
-
+	echo stream_get_contents($pipes[1]);// read from the pipe 
+	
 	fwrite($pipes[0], "h");
+	sleep(1);
+	$xmrReport["hashreport"] = stream_get_contents($pipes[1]);// read from the pipe 
 	fwrite($pipes[0], "c");
+	sleep(1);
+	$xmrReport["connection"] = stream_get_contents($pipes[1]);// read from the pipe 
 	fwrite($pipes[0], "r");
 	sleep(1);
-    echo stream_get_contents($pipes[1]);// read from the pipe 
+	$xmrReport["results"] = stream_get_contents($pipes[1]);// read from the pipe 
+	sleep(1);
 
+	//var_dump($xmrReport);
+	
+	$xmrReport = ParsexmrReport($xmrReport);
+
+    var_dump($xmrReport["connection"]);
+
+ 
     unset($pipes);
 
 
@@ -210,7 +217,8 @@ if (is_resource($minerAliveProcess["resource"])) {
  	echo "\n------------------------------------------\n";
 	echo "---------------sleep----------------------\n";
 	echo "------------------------------------------\n";
-  	sleep(50);
+  	sleep(5);
 }
+
 
 ?>

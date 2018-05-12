@@ -1,5 +1,66 @@
 <?php
 
+function getGpuInfo()
+{
+	
+ $descriptorspec = array(
+	   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+	   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+	   2 => array("file", "/tmp/error-output.txt", "a") // stderr is a file to write to
+	);
+
+	$env = array('some_option' => 'aeiou');
+
+echo "xmr-stak start\n";
+
+$clinfoProcess = array(
+	"process" => "clinfo -l",
+	"directory" => "",
+	"descriptorspec"  => $descriptorspec,
+	"pipes" => NULL,
+	"resource" => NULL,
+	);
+	
+$clinfoProcess["resource"] = proc_open($clinfoProcess["process"], $clinfoProcess["descriptorspec"], $clinfoProcess["pipes"], $clinfoProcess["directory"], $env );	
+//var_dump($xmrStakProcess);	
+
+sleep(5);
+
+if (is_resource($clinfoProcess["resource"])) {
+    // $pipes now looks like this:
+    // 0 => writeable handle connected to child stdin
+    // 1 => readable handle connected to child stdout
+    // Any error output will be appended to /tmp/error-output.txt
+	
+	$pipes = $clinfoProcess["pipes"];
+	
+	//stream_set_timeout($pipes[1], 2);
+	stream_set_blocking($pipes[1], FALSE);
+	$gpuInfo["info"] = stream_get_contents($pipes[1]);// read from the pipe 
+	 
+    unset($pipes);
+
+
+}else
+ {
+ echo "No Data\n";
+ }
+
+$gpuInfo["info"] = explode("\n",$gpuInfo["info"]);
+foreach ($gpuInfo["info"] as &$value) 
+	{
+	   $value = substr($value,12);
+	}
+	array_pop($gpuInfo["info"]);
+	array_shift($gpuInfo["info"]);
+	unset($value);
+	$gpuInfo["count"] = count($gpuInfo["info"]);
+
+	return $gpuInfo;
+
+	
+}
+
 function isHashrate($value)
 {
 	$query = "| ";
@@ -12,17 +73,7 @@ function isHashrate($value)
 
 function getNumOfGpu(){
 
-	$gpuInfo = shell_exec('clinfo -l');
-	$gpuInfo = explode("\n",$gpuInfo);
-
-	foreach ($gpuInfo as &$value) 
-	{
-	   $value = substr($value,12);
-	}
-	array_pop($gpuInfo);
-	array_shift($gpuInfo);
-	unset($value);
-	return count($gpuInfo);
+	
 }
 
 function extractHashrate($report)
@@ -89,7 +140,8 @@ function ParsexmrReport($xmrReport)
 	
 	//var_dump($xmrReport);
 	echo "\n------------------------------------------\n";
-	$numOfGpu = getNumOfGpu();
+	$gpuInfo = getGpuInfo();
+	$numOfGpu = $gpuInfo["count"];
 	$gpus = [];
 	$k = 0;
 	for ($i=0; $i < $numOfGpu; $i++) {

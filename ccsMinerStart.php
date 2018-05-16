@@ -155,7 +155,7 @@ if (is_resource($minerAliveProcess["resource"])) {
 	$pipes = $minerAliveProcess["pipes"];
 	stream_set_blocking($pipes[1], FALSE);
 
-	sleep(5);
+	sleep(10);
 	echo stream_get_contents($pipes[1]);// read from the pipe 
 	unset($pipes);
     

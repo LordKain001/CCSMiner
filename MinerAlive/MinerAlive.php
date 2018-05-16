@@ -1,7 +1,7 @@
 
 <?php
 
-function getDataFromShell(&$Data, $processCommand, $dir)
+function getDataFromShell(&$Data, $processCommand, $dir = "", $wait = false)
 {
 	$descriptorspec = array(
 	   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
@@ -21,8 +21,10 @@ $process = array(
 	
 $process["resource"] = proc_open($process["process"], $process["descriptorspec"], $process["pipes"], $process["directory"], $env );	
 //var_dump($xmrStakProcess);	
+if (!$wait) {
+	sleep(5);	# code...
+}
 
-sleep(5);
 
 if (is_resource($process["resource"])) {
     // $pipes now looks like this:
@@ -33,7 +35,7 @@ if (is_resource($process["resource"])) {
 	$pipes = $process["pipes"];
 	
 	//stream_set_timeout($pipes[1], 2);
-	stream_set_blocking($pipes[1], FALSE);
+	stream_set_blocking($pipes[1], $wait);
 	$Data = stream_get_contents($pipes[1]);// read from the pipe 
 	 
     unset($pipes);
@@ -61,7 +63,7 @@ function getGpuTemps($verboseLevel = NULL)
 	
 
 	try {
-		getDataFromShell($sensors,"sensors","");
+		getDataFromShell($sensors,"sensors","",TRUE);
 		
 	} catch (Exception $e) {
 		echo"Error Reading Sensor Data";
@@ -99,9 +101,22 @@ function getGpuTemps($verboseLevel = NULL)
 	$sensors = json_encode($temp);
 	if ($verboseLevel) {
 		echo "\n";
-		foreach ($temp as $key => $value) {
-			echo $key . " " . $value . "\n";
+		$debug = json_decode($sensors,JSON_PRETTY_PRINT);
+		foreach ($debug as $key => $value) {
+			echo $key . ": ";
+			foreach ($value as $key2 => $value2) 
+			{
+				echo $key2 . ": " . $value2 ."  ";
+			}	
+			echo "\n";
 		}
+		
+		
+		
+		//var_dump(implode("\n",));
+
+
+		
 	}
 	return $sensors;
 }

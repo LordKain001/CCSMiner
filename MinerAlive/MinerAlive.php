@@ -107,7 +107,7 @@ function getGpuTemps($verboseLevel = NULL)
 
 	if ($verboseLevel) {
 		echo "\n";
-		json_decode($sensors, JSON_PRETTY_PRINT)
+		echo json_decode($sensors, JSON_PRETTY_PRINT);
 	}
 
 	return $sensors;

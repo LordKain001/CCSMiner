@@ -99,7 +99,9 @@ function getGpuTemps($verboseLevel = NULL)
 	$sensors = json_encode($temp);
 	if ($verboseLevel) {
 		echo "\n";
-		var_dump($temp);
+		foreach ($temp as $key => $value) {
+			echo $key . " " . $value . "\n";
+		}
 	}
 	return $sensors;
 }

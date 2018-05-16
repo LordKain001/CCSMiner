@@ -92,29 +92,17 @@ function getGpuTemps($verboseLevel = NULL)
  			$temp[$value[0]] = [];
  			$temp[$value[0]] += ["FanSpeed" => $value[2]];
  			$temp[$value[0]] += ["temp" => $value[3]];
- 		}
+ 		} 			
 
-
- 			
- 		
-
- 	}
-
-
- 	
+ 	} 	
  	
 	$sensors = json_encode($temp);
-
 	if ($verboseLevel) {
 		echo "\n";
-		echo json_decode($sensors, JSON_PRETTY_PRINT);
+		var_dump($temp);
 	}
-
 	return $sensors;
-
 }
-
-
 
 
 $configFile = '../config.json';

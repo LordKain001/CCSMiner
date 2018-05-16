@@ -229,7 +229,7 @@ $configFile = '../config.json';
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
 
 	//Send echos to return var
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 0);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	 
 	//Set the content type to application/json
 	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 

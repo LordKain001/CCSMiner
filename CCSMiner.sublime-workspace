@@ -4,12 +4,28 @@
 		"selected_items":
 		[
 			[
-				"start",
-				"startOfAmdReport"
+				"pri",
+				"print_r"
+			],
+			[
+				"json",
+				"json_encode"
 			],
 			[
 				"arra",
-				"array_slice"
+				"array_shift"
+			],
+			[
+				"array_fil",
+				"array_filter"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"start",
+				"startOfAmdReport"
 			],
 			[
 				"fun",
@@ -40,10 +56,6 @@
 				"foreach\tforeach …"
 			],
 			[
-				"array_fil",
-				"array_filter"
-			],
-			[
 				"x",
 				"xmrReport"
 			],
@@ -71,7 +83,7 @@
 			"file": "ccsMinerStart.php",
 			"settings":
 			{
-				"buffer_size": 5684,
+				"buffer_size": 5685,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -99,7 +111,7 @@
 			"file": "xmrParser.php",
 			"settings":
 			{
-				"buffer_size": 2903,
+				"buffer_size": 4211,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -108,7 +120,7 @@
 			"file": "MinerAlive/MinerAlive.php",
 			"settings":
 			{
-				"buffer_size": 3812,
+				"buffer_size": 6568,
 				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
@@ -152,6 +164,7 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0002b2/Bv0002b2/donate-level.hpp",
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/xmrParser.php",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv000815/config",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv0007f1/packed-refs",
@@ -174,7 +187,7 @@
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -207,7 +220,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -216,15 +229,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5684,
+						"buffer_size": 5685,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								92,
-								92
+								4202,
+								4202
 							]
 						],
 						"settings":
@@ -236,7 +249,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -262,7 +275,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 945.0,
+						"translation.y": 630.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
@@ -303,15 +316,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2903,
+						"buffer_size": 4211,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2874,
-								2874
+								2492,
+								2492
 							]
 						],
 						"settings":
@@ -322,7 +335,7 @@
 						"translation.y": 810.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -331,15 +344,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3812,
+						"buffer_size": 6568,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1465,
-								1465
+								1204,
+								1204
 							]
 						],
 						"settings":
@@ -348,10 +361,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 900.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -434,7 +447,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 419.0,
+	"side_bar_width": 97.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

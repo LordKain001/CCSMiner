@@ -1,125 +1,6 @@
 
 <?php
 
-function getDataFromShell(&$Data, $processCommand, $dir = "", $wait = false)
-{
-	$descriptorspec = array(
-	   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
-	   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
-	   2 => array("file", "/tmp/error-output.txt", "a") // stderr is a file to write to
-	);
-
-	$env = array('some_option' => 'aeiou');
-
-$process = array(
-	"process" => $processCommand,
-	"directory" => $dir,
-	"descriptorspec"  => $descriptorspec,
-	"pipes" => NULL,
-	"resource" => NULL,
-	);
-	
-$process["resource"] = proc_open($process["process"], $process["descriptorspec"], $process["pipes"], $process["directory"], $env );	
-//var_dump($xmrStakProcess);	
-if (!$wait) {
-	sleep(5);	# code...
-}
-
-
-if (is_resource($process["resource"])) {
-    // $pipes now looks like this:
-    // 0 => writeable handle connected to child stdin
-    // 1 => readable handle connected to child stdout
-    // Any error output will be appended to /tmp/error-output.txt
-	
-	$pipes = $process["pipes"];
-	
-	//stream_set_timeout($pipes[1], 2);
-	stream_set_blocking($pipes[1], $wait);
-	$Data = stream_get_contents($pipes[1]);// read from the pipe 
-	 
-    unset($pipes);
-
-
-}else
- {
-	throw new Exception('No Process Stream Ressource');
- }
-
-}
-
-function isAmdPart($var)
-{
-	
-	if(substr( $var, 0, strlen($query) ) === $query)
-	{
-		return true;
-	}
-}
-
-function getGpuTemps($verboseLevel = NULL)
-{
-	$sensors = Null;
-	
-
-	try {
-		getDataFromShell($sensors,"sensors","",TRUE);
-		
-	} catch (Exception $e) {
-		echo"Error Reading Sensor Data";
-	}
-
- 	$sensors = explode("\n\n",$sensors);
- 	$temp = [];
- 	$query = "amd";
- 	array_pop($sensors);
- 
-
- 	foreach ($sensors as &$value) {
- 		$value =explode("\n",$value);
-
- 		$value[2] = preg_replace('!\s+!', ' ',$value[2]);
- 		$value[2] = explode(" ",$value[2]);
-		array_shift($value[2]);
-		$value[2] = array_shift($value[2]);
- 		
-
- 		$value[3] = preg_replace('!\s+!', ' ',$value[3]);
- 		$value[3] = explode(" ",$value[3]);
-		array_shift($value[3]);
-		$value[3] = array_shift($value[3]);
- 		
-
- 		if (substr( $value[0], 0, strlen($query) ) === $query) {
- 			$temp[$value[0]] = [];
- 			$temp[$value[0]] += ["FanSpeed" => $value[2]];
- 			$temp[$value[0]] += ["temp" => $value[3]];
- 		} 			
-
- 	} 	
- 	
-	$sensors = json_encode($temp);
-	if ($verboseLevel) {
-		echo "\n";
-		$debug = json_decode($sensors,JSON_PRETTY_PRINT);
-		foreach ($debug as $key => $value) {
-			echo $key . ": ";
-			foreach ($value as $key2 => $value2) 
-			{
-				echo $key2 . ": " . $value2 ."  ";
-			}	
-			echo "\n";
-		}
-		
-		
-		
-		//var_dump(implode("\n",));
-
-
-		
-	}
-	return $sensors;
-}
 
 
 $configFile = '../config.json';
@@ -151,12 +32,17 @@ $configFile = '../config.json';
 		echo "------------------------------------------------------------------------------------------------\n";
 		echo "---------------------------------------Alive Failed---------------------------------------------\n";
 		echo "------------------------------------------------------------------------------------------------\n";
-		$status["errors"] = 0;
-		$status["sucess"] = 0;
-		file_put_contents($statusFile, json_encode($status));
-		shell_exec("echo s | sudo tee /proc/sysrq-trigger");
-		shell_exec("echo U | sudo tee /proc/sysrq-trigger");
-		shell_exec("echo b | sudo tee /proc/sysrq-trigger");
+
+		shell_exec("sudo rm $statusFile");
+
+		if (!file_exists($statusFile))
+		{
+			shell_exec("echo s | sudo tee /proc/sysrq-trigger");
+			shell_exec("echo U | sudo tee /proc/sysrq-trigger");
+			shell_exec("echo b | sudo tee /proc/sysrq-trigger");
+
+		}
+		
 	}
 	file_put_contents($statusFile, json_encode($status));
 
@@ -268,5 +154,119 @@ function getGitBranch()
     }
     return null;
 }
+
+
+function getDataFromShell(&$Data, $processCommand, $dir = "", $wait = false)
+{
+	$descriptorspec = array(
+	   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
+	   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
+	   2 => array("file", "/tmp/error-output.txt", "a") // stderr is a file to write to
+	);
+
+	$env = array('some_option' => 'aeiou');
+
+$process = array(
+	"process" => $processCommand,
+	"directory" => $dir,
+	"descriptorspec"  => $descriptorspec,
+	"pipes" => NULL,
+	"resource" => NULL,
+	);
+	
+$process["resource"] = proc_open($process["process"], $process["descriptorspec"], $process["pipes"], $process["directory"], $env );	
+//var_dump($xmrStakProcess);	
+if (!$wait) {
+	sleep(5);	# code...
+}
+
+
+if (is_resource($process["resource"])) {
+    // $pipes now looks like this:
+    // 0 => writeable handle connected to child stdin
+    // 1 => readable handle connected to child stdout
+    // Any error output will be appended to /tmp/error-output.txt
+	
+	$pipes = $process["pipes"];
+	
+	//stream_set_timeout($pipes[1], 2);
+	stream_set_blocking($pipes[1], $wait);
+	$Data = stream_get_contents($pipes[1]);// read from the pipe 
+	 
+    unset($pipes);
+
+
+}else
+ {
+	throw new Exception('No Process Stream Ressource');
+ }
+
+}
+
+function getGpuTemps($verboseLevel = NULL)
+{
+	$sensors = Null;
+	
+
+	try {
+		getDataFromShell($sensors,"sensors","",TRUE);
+		
+	} catch (Exception $e) {
+		echo"Error Reading Sensor Data";
+	}
+
+ 	$sensors = explode("\n\n",$sensors);
+ 	$temp = [];
+ 	$query = "amd";
+ 	array_pop($sensors);
+ 
+
+ 	foreach ($sensors as &$value) {
+ 		$value =explode("\n",$value);
+
+ 		$value[2] = preg_replace('!\s+!', ' ',$value[2]);
+ 		$value[2] = explode(" ",$value[2]);
+		array_shift($value[2]);
+		$value[2] = array_shift($value[2]);
+ 		
+
+ 		$value[3] = preg_replace('!\s+!', ' ',$value[3]);
+ 		$value[3] = explode(" ",$value[3]);
+		array_shift($value[3]);
+		$value[3] = array_shift($value[3]);
+ 		
+
+ 		if (substr( $value[0], 0, strlen($query) ) === $query) {
+ 			$temp[$value[0]] = [];
+ 			$temp[$value[0]] += ["FanSpeed" => $value[2]];
+ 			$temp[$value[0]] += ["temp" => $value[3]];
+ 		} 			
+
+ 	} 	
+ 	
+	$sensors = json_encode($temp);
+	if ($verboseLevel) {
+		echo "\n";
+		$debug = json_decode($sensors,JSON_PRETTY_PRINT);
+		foreach ($debug as $key => $value) {
+			echo $key . ": ";
+			foreach ($value as $key2 => $value2) 
+			{
+				echo $key2 . ": " . $value2 ."  ";
+			}	
+			echo "\n";
+		}
+		
+		
+		
+		//var_dump(implode("\n",));
+
+
+		
+	}
+	return $sensors;
+}
+
+
 ?>
 

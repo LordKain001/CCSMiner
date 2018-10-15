@@ -153,6 +153,7 @@ if($multipleIntesity >0)
 		"affine_to_cpu" : false,
 		"strided_index" : 1,
 		"mem_chunk" : 2,
+		"unroll" : 8,
 		"comp_mode" : true
 	},
 	{
@@ -162,6 +163,7 @@ if($multipleIntesity >0)
 		"affine_to_cpu" : false,
 		"strided_index" : 1,
 		"mem_chunk" : 2,
+		"unroll" : 8,
 		"comp_mode" : true
 	},';
 	  $counter++;

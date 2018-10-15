@@ -9,4 +9,4 @@
   "tls_fingerprint" : "",
   "pool_weight" : 1 },
 ],
-"currency" : "monero7",
+"currency" : "cryptonight_v7",

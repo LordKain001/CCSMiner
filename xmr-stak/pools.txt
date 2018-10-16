@@ -1,12 +1,12 @@
 "pool_list" :
 [
   {"pool_address" : "home.ccs.at:3333",
-  "wallet_address" : "L13",
-  "rig_id" : "L13",
-  "pool_password" : "L13",
+  "wallet_address" : "L01",
+  "rig_id" : "L01",
+  "pool_password" : "L01",
   "use_nicehash" : true,
   "use_tls" : false,
   "tls_fingerprint" : "",
   "pool_weight" : 1 },
 ],
-"currency" : "cryptonight_v7",
+"currency" : "monero",

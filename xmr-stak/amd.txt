@@ -2,7 +2,7 @@
 	"gpu_threads_conf" : [
 	{
 		"index" : 0,
-		"intensity" : 504,
+		"intensity" : 400,
 		"worksize" : 8,
 		"affine_to_cpu" : false,
 		"strided_index" : 1,
@@ -12,7 +12,7 @@
 	},
 	{
 		"index" : 0,
-		"intensity" : 504,
+		"intensity" : 400,
 		"worksize" : 8,
 		"affine_to_cpu" : false,
 		"strided_index" : 1,
@@ -22,7 +22,7 @@
 	},
 	{
 		"index" : 1,
-		"intensity" : 504,
+		"intensity" : 400,
 		"worksize" : 8,
 		"affine_to_cpu" : false,
 		"strided_index" : 1,
@@ -32,7 +32,47 @@
 	},
 	{
 		"index" : 1,
-		"intensity" : 504,
+		"intensity" : 400,
+		"worksize" : 8,
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"unroll" : 8,
+		"comp_mode" : true
+	},
+	{
+		"index" : 2,
+		"intensity" : 400,
+		"worksize" : 8,
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"unroll" : 8,
+		"comp_mode" : true
+	},
+	{
+		"index" : 2,
+		"intensity" : 400,
+		"worksize" : 8,
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"unroll" : 8,
+		"comp_mode" : true
+	},
+	{
+		"index" : 3,
+		"intensity" : 400,
+		"worksize" : 8,
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"unroll" : 8,
+		"comp_mode" : true
+	},
+	{
+		"index" : 3,
+		"intensity" : 400,
 		"worksize" : 8,
 		"affine_to_cpu" : false,
 		"strided_index" : 1,

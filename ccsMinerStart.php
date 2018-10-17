@@ -38,6 +38,15 @@ echo "MinerName: " . $config["minerName"] . "\n";
 
 
 
+
+
+
+	//check for Reset
+	//If it cant pass the whole script the Error count will increase(2 times wirte on file)
+	$statusFile = './MinerAlive/status.json';
+	unlink($statusFile);
+
+
 switch ($config["installStatus"]) {
 	case '1':
 		if (!file_exists("/etc/systemd/system/ccsMiner.service"))

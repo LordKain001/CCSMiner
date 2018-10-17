@@ -42,7 +42,7 @@ $configFile = '../config.json';
 
 		}
 
-
+		sleep(120);
 		if (!file_exists($statusFile))
 		{
 			shell_exec("echo s | sudo tee /proc/sysrq-trigger");

@@ -80,6 +80,26 @@
 		"unroll" : 8,
 		"comp_mode" : true
 	},
+	{
+		"index" : 4,
+		"intensity" : 400,
+		"worksize" : 8,
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"unroll" : 8,
+		"comp_mode" : true
+	},
+	{
+		"index" : 4,
+		"intensity" : 400,
+		"worksize" : 8,
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"unroll" : 8,
+		"comp_mode" : true
+	},
 	],
 
 	"platform_index" : 0,

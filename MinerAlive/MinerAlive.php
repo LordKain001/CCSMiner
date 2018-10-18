@@ -29,10 +29,12 @@ $configFile = '../config.json';
 	$status["errors"]++;
 	if($status["errors"] >= 10)
 	{
+		
 		echo "------------------------------------------------------------------------------------------------\n";
 		echo "---------------------------------------Alive Failed---------------------------------------------\n";
 		echo "------------------------------------------------------------------------------------------------\n";
-
+		sleep(60);
+		
 		while(!unlink($statusFile))
 		{
 			echo "------------------------------------------------------------------------------------------------\n";
@@ -42,15 +44,13 @@ $configFile = '../config.json';
 
 		}
 
-		sleep(120);
-		if (!file_exists($statusFile))
-		{
-			shell_exec("echo s | sudo tee /proc/sysrq-trigger");
-			shell_exec("echo U | sudo tee /proc/sysrq-trigger");
-			shell_exec("echo b | sudo tee /proc/sysrq-trigger");
-
-		}
 		
+		
+		shell_exec("echo s | sudo tee /proc/sysrq-trigger");
+		shell_exec("echo U | sudo tee /proc/sysrq-trigger");
+		shell_exec("echo b | sudo tee /proc/sysrq-trigger");
+
+				
 	}
 	file_put_contents($statusFile, json_encode($status));
 

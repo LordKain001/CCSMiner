@@ -65,9 +65,10 @@ if($tries>5)
 {
 	$poolAdress = "pool.supportxmr.com:3333";
 	$Walletadress = "47fWF6DkSumWrMxkpkM1vJ7ZBKrs8SaK7FJUgeVi622y5wedi39TNroQpyCFLyAF59BUGauxFeKXjXMZJiV2dU6iKoPdx2r";
-	$currency = "monero7";
+	$currency = "monero";
 	$minerId = "BackUp_Miner";
-	$multipleIntesity = 50;
+	$worksize = 16;
+	$multipleIntesity = 25;
 }else
 {
 	$result = array_shift($result);
@@ -90,7 +91,13 @@ if($tries>5)
 		$multipleIntesity = $result['multipleIntesity'];	
 	}else
 	{
-		$multipleIntesity = 50;
+		$multipleIntesity = 25;
+	}
+	if (isset($result['worksize'])) {
+		$worksize = $result['worksize'];	
+	}else
+	{
+		$worksize = 25;
 	}
 }
 
@@ -139,7 +146,7 @@ if($multipleIntesity >0)
 
 
 
-	$worksize = 8;
+	
 	$intensity = $worksize * $multipleIntesity;
 	$counter = 0;
 

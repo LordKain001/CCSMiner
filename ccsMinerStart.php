@@ -72,7 +72,7 @@ switch ($config["installStatus"]) {
 
 		
 	case '2':
-		passthru("sudo apt install -y libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev lm-sensors git ssh php php7.0-curl clinfo");
+		passthru("sudo apt install -y libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev lm-sensors git ssh php php-curl clinfo");
 		passthru("sudo apt dist-upgrade -y");
 		passthru("sudo apt update -y");
 		passthru("sudo apt upgrade -y");

@@ -80,11 +80,11 @@ switch ($config["installStatus"]) {
 		break;
 	
 	case '3':
-		passthru("wget --referer=http://support.amd.com https://www2.ati.com/drivers/linux/beta/ubuntu/amdgpu-pro-17.40.2712-510357.tar.xz");
-		passthru("sudo chmod 777 amdgpu-pro-17.40.2712-510357.tar.xz");
-		passthru("tar -Jxvf amdgpu-pro-17.40.2712-510357.tar.xz");
-		passthru("sudo chmod 777 -R amdgpu-pro-17.40.2712-510357");
-		passthru("amdgpu-pro-17.40.2712-510357/amdgpu-pro-install -y --compute");
+		passthru("wget --referer=http://support.amd.com https://drivers.amd.com/drivers/linux/amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
+		passthru("sudo chmod 777 amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
+		passthru("tar -Jxvf amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
+		passthru("sudo chmod 777 -R amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
+		passthru("amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz/amdgpu-pro-install -y --opencl=pal,legacy --headless");
 	
 	case '4':
 

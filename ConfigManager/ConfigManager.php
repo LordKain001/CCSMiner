@@ -28,7 +28,7 @@ if (!class_exists('configManager')) {
 		{
 			if (file_exists($this->configFileName)) 
 			{
-				$this->minerData = json_decode(file_get_contents($this->configFileName), TRUE);
+//				$this->minerData = json_decode(file_get_contents($this->configFileName), TRUE);
 			}else
 			{
 				echo"Enter Miner-ID:";

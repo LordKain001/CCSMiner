@@ -1,6 +1,6 @@
 <?php
 
-include "./ConfigManager/ConfigManager.php";
+//include "./ConfigManager/ConfigManager.php";
 include "xmrParser.php";
 
 
@@ -26,17 +26,6 @@ if (file_exists($configFile))
 }
 
 echo "MinerName: " . $config["minerName"] . "\n";
-
-	{
-		"index" : 0,
-		"intensity" : 400,
-		"worksize" : 16,
-		"affine_to_cpu" : false,
-		"strided_index" : 1,
-		"mem_chunk" : 2,
-		"unroll" : 8,
-		"comp_mode" : true
-	},
 
 	//check for Reset
 	//If it cant pass the whole script the Error count will increase(2 times wirte on file)

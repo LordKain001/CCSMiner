@@ -10,16 +10,33 @@ passthru("sudo chmod 777 -R ../CCSMiner");
 $configFile = "config.json";
 $config = NULL;
 
+
 if (file_exists($configFile))
 {
 	$config = json_decode(file_get_contents($configFile), TRUE);	
 }else
 {
 	$config = array(
+		"minerName" => "",
 		"installStatus" => 1,
 	);
+	echo"Enter Miner-ID:";
+	$config["minerName"] = trim(fgets(STDIN)); // reads one line from STDIN
+	file_put_contents($configFile, json_encode($config));
 }
 
+echo "MinerName: " . $config["minerName"] . "\n";
+
+	{
+		"index" : 0,
+		"intensity" : 400,
+		"worksize" : 16,
+		"affine_to_cpu" : false,
+		"strided_index" : 1,
+		"mem_chunk" : 2,
+		"unroll" : 8,
+		"comp_mode" : true
+	},
 
 	//check for Reset
 	//If it cant pass the whole script the Error count will increase(2 times wirte on file)
@@ -36,9 +53,10 @@ switch ($config["installStatus"]) {
 
 		if (!file_exists("/etc/systemd/system/multi-user.target.wants/ccsMiner.service"))
 		{
-			passthru("sudo cp -v ccsMiner.service /etc/systemd/system/multi-user.target.wants");
+			//passthru("sudo cp -v ccsMiner.service /etc/systemd/system/multi-user.target.wants");
 		}
 
+		passthru('systemctl enable ccsMiner.service');		
 
 		passthru('echo "vm.nr_hugepages=128" >> /etc/sysctl.conf');
 		passthru('echo "kernel.panic = 1" >> /etc/sysctl.conf');
@@ -52,7 +70,7 @@ switch ($config["installStatus"]) {
 
 		
 	case '2':
-		passthru("sudo apt install -y libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev lm-sensors git ssh php php7.0-curl clinfo");
+		passthru("sudo apt install -y libssl-dev cmake build-essential libhwloc-dev lm-sensors git ssh php php-curl clinfo libmicrohttpd-dev libssl-dev cmake build-essential libhwloc-dev opencl-amdgpu-pro-dev");
 		passthru("sudo apt dist-upgrade -y");
 		passthru("sudo apt update -y");
 		passthru("sudo apt upgrade -y");
@@ -63,8 +81,8 @@ switch ($config["installStatus"]) {
 		passthru("wget --referer=http://support.amd.com https://drivers.amd.com/drivers/linux/amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
 		passthru("sudo chmod 777 amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
 		passthru("tar -Jxvf amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
-		passthru("sudo chmod 777 -R amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz");
-		passthru("amdgpu-pro-18.40-676022-ubuntu-18.04.tar.xz/amdgpu-pro-install -y --opencl=pal,legacy --headless");
+		passthru("sudo chmod 777 -R amdgpu-pro-18.40-676022-ubuntu-18.04");
+		passthru("amdgpu-pro-18.40-676022-ubuntu-18.04/amdgpu-pro-install -y --opencl=pal,legacy --headless");
 	
 	case '4':
 

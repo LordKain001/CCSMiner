@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"sta",
+				"statusFile"
+			],
+			[
 				"pri",
 				"print_r"
 			],
@@ -80,49 +84,12 @@
 	"buffers":
 	[
 		{
-			"file": "ccsMinerStart.php",
+			"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv003c9e/Bv003c9e/ccsMinerStart.php",
 			"settings":
 			{
-				"buffer_size": 5685,
+				"buffer_size": 5929,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "xmr-stak/startXmrStak.php",
-			"settings":
-			{
-				"buffer_size": 3886,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "TestxmrParse.php",
-			"settings":
-			{
-				"buffer_size": 881,
-				"encoding": "UTF-8",
-				"line_ending": "Windows",
-				"name": "TestxmrParse"
-			}
-		},
-		{
-			"file": "xmrParser.php",
-			"settings":
-			{
-				"buffer_size": 4211,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "MinerAlive/MinerAlive.php",
-			"settings":
-			{
-				"buffer_size": 6568,
-				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -164,11 +131,27 @@
 	],
 	"file_history":
 	[
-		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0002b2/Bv0002b2/donate-level.hpp",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/ccsMinerStart.php",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/xmr-stak/startXmrStak.php",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/TestxmrParse.php",
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/xmrParser.php",
+		"/C/Users/Mike/Documents/GitHub/CCSMiner/MinerAlive/MinerAlive.php",
+		"/C/Users/Mike/Downloads/tdxminer-v0.2.2.2/tdxminer-v0.2.2.2/README.md",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv003be8/Bv003be8/ccsMinerStart.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv004aa6/Bv004aa6/ccsMinerStart.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv005fe8/Bv005fe8/copyService.sh",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv007377/Bv0002c6/amd.txt",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv007377/Bv000158/amd.txt",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv007377/Bv007fd0/startXmrStak.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv007377/Bv007bf0/config.txt",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv007377/Bv007bcc/amd.txt",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv007377/Bv007b2f/pools.txt",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv007377/Bv0002f7/startXmrStak.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv00544b/Bv005496/startXmrStak.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv006a23/Bv006a30/ccsMinerStart.php",
+		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0002b2/Bv0002b2/donate-level.hpp",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv000815/config",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0007f1/Bv0007f1/packed-refs",
-		"/C/Users/Mike/Documents/GitHub/CCSMiner/MinerAlive/MinerAlive.php",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv004a20/Bv004b84/pools.txt",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv004a20/Bv004a2a/config.txt",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0072ac/Bv0072ac/config.txt",
@@ -181,7 +164,6 @@
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/description",
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/config",
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/.git/FETCH_HEAD",
-		"/C/Users/Mike/Documents/GitHub/CCSMiner/ccsMinerStart.php",
 		"/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv0059cb/Bv0059cb/MinerAlive.php",
 		"/C/Users/Mike/Documents/GitHub/CCSMiner/CCSMiner.sublime-project"
 	],
@@ -201,6 +183,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"config",
 			"var",
 			"amdgpu"
 		],
@@ -220,24 +203,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "ccsMinerStart.php",
+					"file": "/C/Users/Mike/AppData/Local/Temp/BvSshSftp/Bv003c9e/Bv003c9e/ccsMinerStart.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5685,
+						"buffer_size": 5929,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4202,
-								4202
+								2327,
+								2327
 							]
 						],
 						"settings":
@@ -246,122 +229,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "xmr-stak/startXmrStak.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3886,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								519,
-								519
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 630.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "TestxmrParse.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 881,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								445,
-								448
-							]
-						],
-						"settings":
-						{
-							"auto_name": "TestxmrParse",
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "xmrParser.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4211,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2492,
-								2492
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 810.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "MinerAlive/MinerAlive.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6568,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1204,
-								1204
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2475.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -447,7 +315,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 97.0,
+	"side_bar_width": 266.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

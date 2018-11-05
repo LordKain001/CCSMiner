@@ -1,17 +1,9 @@
 <?php
 
-//include 'ConfigManager/ConfigManager.php';
-
-
-/*
-$ConfigManager = new configManager;
-//var_dump($ConfigManager);
-echo "end of Configmanager";
-	sleep(5);
-*/
-
-
+include "./ConfigManager/ConfigManager.php";
 include "xmrParser.php";
+
+
 
 passthru("sudo chmod 777 -R ../CCSMiner");
 
@@ -24,21 +16,9 @@ if (file_exists($configFile))
 }else
 {
 	$config = array(
-		"minerName" => "",
 		"installStatus" => 1,
 	);
-
-	echo"Enter Miner-ID:";
-	$config["minerName"] = trim(fgets(STDIN)); // reads one line from STDIN
-	file_put_contents($configFile, json_encode($config));
 }
-
-
-echo "MinerName: " . $config["minerName"] . "\n";
-
-
-
-
 
 
 	//check for Reset

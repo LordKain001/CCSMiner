@@ -112,11 +112,6 @@ if (!class_exists('xmrStak')) {
 
 
 
-
-
-
-
-
 			$pooldata = '"pool_list" :
 			[
 			  {"pool_address" : "'. $poolAdress . '",
@@ -138,13 +133,12 @@ if (!class_exists('xmrStak')) {
 			$amdData = '"gpu_threads_conf" : [';
 							
 			$intensity = $worksize * $multipleIntesity;
-			$counter = 0;
-
+			
 
 			for ($i=0; $i < $numOfGpu; $i++) { 
 				  $amdData .= '
 			{
-				"index" : '. $counter .',
+				"index" : '. $i .',
 				"intensity" : '.$intensity.',
 				"worksize" : '.$worksize.',
 				"affine_to_cpu" : false,
@@ -154,7 +148,7 @@ if (!class_exists('xmrStak')) {
 				"comp_mode" : true
 			},
 			{
-				"index" : '. $counter .',
+				"index" : '. $i .',
 				"intensity" : '.$intensity.',
 				"worksize" : '.$worksize.',
 				"affine_to_cpu" : false,

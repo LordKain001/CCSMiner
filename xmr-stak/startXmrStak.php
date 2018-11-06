@@ -1,9 +1,6 @@
 <?php
 
 
-
-
-
 if (!class_exists('xmrStak')) {
 
 	class xmrStak
@@ -51,13 +48,13 @@ if (!class_exists('xmrStak')) {
 			var_dump($xmrInputData);
 			var_dump($minerInputData);
 			
-			if(file_exists('amd.txt')){
-			    unlink('amd.txt');
+			if(file_exists('./xmr-stak/amd.txt')){
+			    unlink('./xmr-stak/amd.txt');
 			}else{
 			    echo 'amd.txt not found';
 			}
-			if(file_exists('pools.txt')){
-			    unlink('pools.txt');
+			if(file_exists('./xmr-stak/pools.txt')){
+			    unlink('./xmr-stak/pools.txt');
 			}else{
 			    echo 'pools.txt not found';
 			}
@@ -133,7 +130,7 @@ if (!class_exists('xmrStak')) {
 			],
 			"currency" : "'.$currency.'",';
 
-			file_put_contents("pools.txt", $pooldata);
+			file_put_contents("./xmr-stak/pools.txt", $pooldata);
 
 
 
@@ -177,7 +174,7 @@ if (!class_exists('xmrStak')) {
 
 			//var_dump($amdData);
 
-			file_put_contents("amd.txt", $amdData);
+			file_put_contents("./xmr-stak/amd.txt", $amdData);
 
 		}
 

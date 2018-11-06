@@ -26,20 +26,22 @@ if (!class_exists('configManager')) {
 		
 		function __construct()
 		{
+		
 			if (file_exists($this->configFileName)) 
 			{
-//				$this->minerData = json_decode(file_get_contents($this->configFileName), TRUE);
-			}else
+					$this = unserialize(file_get_contents($this->configFileName));
+			}
+			while (is_null($this->minerData["minerUid"]))
 			{
 				echo"Enter Miner-ID:";
 				$this->minerData['minerUid'] = trim(fgets(STDIN)); // reads one line from STDIN
 			}
 			
 			$this->retrieveHw();
-			$this->getMinerConfig();
-			
+			$this->getMinerConfig();			
 
-			file_put_contents($this->configFileName, json_encode($this));
+			file_put_contents($this->configFileName, serialize($this));
+			
 		}
 
 		private function retrieveHw()
@@ -117,10 +119,6 @@ if (!class_exists('configManager')) {
 }
 
 
-$ConfigManager = new configManager;
-var_dump($ConfigManager);
-echo "MinerName: " . $ConfigManager.minerData["minerUid"] . "\n";
-	sleep(5);
 
 
 ?>

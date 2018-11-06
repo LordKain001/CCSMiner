@@ -1,9 +1,14 @@
 <?php
 
-//include "./ConfigManager/ConfigManager.php";
+include "./ConfigManager/ConfigManager.php";
 include "xmrParser.php";
 
 
+$ConfigManager = new configManager;
+var_dump($ConfigManager);
+echo "MinerName: " . $ConfigManager->minerData["minerUid"] . "\n";
+
+	
 
 passthru("sudo chmod 777 -R ../CCSMiner");
 
@@ -17,15 +22,11 @@ if (file_exists($configFile))
 }else
 {
 	$config = array(
-		"minerName" => "",
+		"minerName" => $ConfigManager->minerData["minerUid"],
 		"installStatus" => 1,
 	);
-	echo"Enter Miner-ID:";
-	$config["minerName"] = trim(fgets(STDIN)); // reads one line from STDIN
-	file_put_contents($configFile, json_encode($config));
 }
 
-echo "MinerName: " . $config["minerName"] . "\n";
 
 	//check for Reset
 	//If it cant pass the whole script the Error count will increase(2 times wirte on file)

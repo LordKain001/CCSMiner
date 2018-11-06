@@ -6,6 +6,8 @@ include "./xmr-stak/startXmrStak.php";
 //include "xmrParser.php";
 
 
+sleep(60);
+
 $ConfigManager = new configManager();
 var_dump($ConfigManager);
 echo "MinerName: " . $ConfigManager->minerData["minerUid"] . "\n";

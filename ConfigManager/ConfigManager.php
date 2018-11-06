@@ -29,7 +29,7 @@ if (!class_exists('configManager')) {
 		
 			if (file_exists($this->configFileName)) 
 			{
-					$this = unserialize(file_get_contents($this->configFileName));
+				$this->minerData = json_decode(file_get_contents($this->configFileName), TRUE);
 			}
 			while (is_null($this->minerData["minerUid"]))
 			{
@@ -40,7 +40,7 @@ if (!class_exists('configManager')) {
 			$this->retrieveHw();
 			$this->getMinerConfig();			
 
-			file_put_contents($this->configFileName, serialize($this));
+			file_put_contents($this->configFileName, json_encode($this->minerData));
 			
 		}
 

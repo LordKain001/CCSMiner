@@ -1,12 +1,19 @@
 <?php
 
+
 include "./ConfigManager/ConfigManager.php";
-include "xmrParser.php";
+include "./xmr-stak/startXmrStak.php";
+//include "xmrParser.php";
 
 
-$ConfigManager = new configManager;
+$ConfigManager = new configManager();
 var_dump($ConfigManager);
 echo "MinerName: " . $ConfigManager->minerData["minerUid"] . "\n";
+
+$XmrStak = new XmrStak($ConfigManager->xmrData, $ConfigManager->minerData);
+//var_dump($XmrStak);
+
+
 
 	
 
@@ -99,8 +106,6 @@ if ($config["installStatus"]<4) {
 	exec("sudo reboot");
 }
 
-
-
  $descriptorspec = array(
 	   0 => array("pipe", "r"),  // stdin is a pipe that the child will read from
 	   1 => array("pipe", "w"),  // stdout is a pipe that the child will write to
@@ -109,18 +114,6 @@ if ($config["installStatus"]<4) {
 
 $env = array('some_option' => 'aeiou');
 
-echo "xmr-stak start\n";
-
-$xmrStakProcess = array(
-	"process" => "php ./startXmrStak.php",
-	"directory" => "xmr-stak",
-	"descriptorspec"  => $descriptorspec,
-	"pipes" => NULL,
-	"resource" => NULL,
-	);
-	
-$xmrStakProcess["resource"] = proc_open($xmrStakProcess["process"], $xmrStakProcess["descriptorspec"], $xmrStakProcess["pipes"], $xmrStakProcess["directory"], $env );	
-//var_dump($xmrStakProcess);	
 
 $minerAliveProcess = array(
 	"process" => "php ./MinerAlive.php",
@@ -135,9 +128,13 @@ $minerAliveProcess = array(
 //echo "Miner Alive Fork Succes\n";
 
 
+
+
+$XmrStak->startMining();
+
 		
 while (1) {
-	sleep(60);
+	//sleep(60);
    
 	echo "\n------------------------------------------\n";
 	echo "---------------alive----------------------\n";
@@ -168,49 +165,8 @@ if (is_resource($minerAliveProcess["resource"])) {
 	echo "---------------xmr-stak:----------------------\n";
 	echo "------------------------------------------\n";
 
-  if (is_resource($xmrStakProcess["resource"])) {
-    // $pipes now looks like this:
-    // 0 => writeable handle connected to child stdin
-    // 1 => readable handle connected to child stdout
-    // Any error output will be appended to /tmp/error-output.txt
-	
-	$pipes = $xmrStakProcess["pipes"];
-	
-	//stream_set_timeout($pipes[1], 2);
-	stream_set_blocking($pipes[1], FALSE);
-	echo stream_get_contents($pipes[1]);// read from the pipe 
-	
-	fwrite($pipes[0], "h");
-	sleep(1);
-	$xmrReport["hashreport"] = stream_get_contents($pipes[1]);// read from the pipe 
-	fwrite($pipes[0], "c");
-	sleep(1);
-	$xmrReport["connection"] = stream_get_contents($pipes[1]);// read from the pipe 
-	fwrite($pipes[0], "r");
-	sleep(1);
-	$xmrReport["results"] = stream_get_contents($pipes[1]);// read from the pipe 
-	sleep(1);
-
-	//var_dump($xmrReport);
-
-	$xmrReport = ParsexmrReport($xmrReport);
-
-    var_dump($xmrReport["connection"]);
-
- 
-    unset($pipes);
-
-
-}else
- {
- echo "No Data\n";
- }
- 
-
-
-
-	//exec("sudo php ./MinerAlive.php");
-
+	$XmrStak->UpdateReport();
+	$XmrStak->ReportHashRates();
 
  	echo "\n------------------------------------------\n";
 	echo "---------------sleep----------------------\n";

@@ -47,6 +47,9 @@ if (!class_exists('xmrStak')) {
 		function __construct($xmrInputData, $minerInputData)
 		{
 			//Sanity checks
+
+			var_dump($xmrInputData);
+			var_dump($minerInputData);
 			
 			if(file_exists('amd.txt')){
 			    unlink('amd.txt');
@@ -79,6 +82,9 @@ if (!class_exists('xmrStak')) {
 
 			if (isset($xmrInputData['currency'])) {
 				$currency = $xmrInputData['currency'];	
+			}else
+			{
+				$currency = "monero";
 			}
 
 			if ((isset($xmrInputData['multipleIntesity']) || (!$xmrInputData['multipleIntesity'] > 0))) {

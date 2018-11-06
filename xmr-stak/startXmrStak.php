@@ -332,10 +332,7 @@ if (!class_exists('xmrStak')) {
 						if ($thread[0]["10s"] == "(na)" || $thread[1]["10s"] == "(na)") {
 						$gpus[$i]["Status"] = "failed";	
 						}
-					}
-					
-
-					
+					}					
 
 					if (count($thread[0]) != 0) {
 						$gpus[$i]["AVG"] = round((array_sum($thread[0]) + array_sum($thread[1])) / count($thread[0]));

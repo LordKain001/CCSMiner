@@ -133,6 +133,9 @@ if (!class_exists('xmrStak')) {
 			$amdData = '"gpu_threads_conf" : [';
 							
 			$intensity = $worksize * $multipleIntesity;
+			if ($intensity > 400) {
+				$intensity = 400;
+			}
 			
 
 			for ($i=0; $i < $numOfGpu; $i++) { 
@@ -176,7 +179,13 @@ if (!class_exists('xmrStak')) {
 		public function startMining()
 		{
 
-			echo "Start xmr-stak";
+			echo "Start xmr-stak\n";
+			echo "Exporting Vars\n";
+
+			exec("export GPU_FORCE_64BIT_PTR=1");
+			exec("export GPU_MAX_HEAP_SIZE=100");
+			exec("export GPU_MAX_ALLOC_PERCENT=100");
+			exec("export GPU_SINGLE_ALLOC_PERCENT=100");
 
 			$this->xmrStakProcess["resource"] = proc_open($this->xmrStakProcess["process"], $this->xmrStakProcess["descriptorspec"], $this->xmrStakProcess["pipes"], $this->xmrStakProcess["directory"], $this->env );	
 		}
@@ -185,8 +194,10 @@ if (!class_exists('xmrStak')) {
 		{
 
 			echo "update xmr-stak";
+			$this->xmrStakProcessStatus = proc_get_status($this->xmrStakProcess["resource"]);
+			var_dump($this->xmrStakProcessStatus);
 
-			if (is_resource($this->xmrStakProcess["resource"])) {
+			if ($this->xmrStakProcessStatus["running"]) {
 		    // $pipes now looks like this:
 		    // 0 => writeable handle connected to child stdin
 		    // 1 => readable handle connected to child stdout
@@ -213,20 +224,11 @@ if (!class_exists('xmrStak')) {
 
 			unset($pipes);
 
-
 			}else
 			{
-			echo "No Data\n";
+			echo "ERROR - No Process\n";
 			}
-
-
-			var_dump($this->gpus);
-
-
 		}
-
-
-
 
 		private function isHashrate($value)
 		{
@@ -276,8 +278,7 @@ if (!class_exists('xmrStak')) {
 
 		private function ParsexmrReport($xmrReport)
 		{
-
-			var_dump($xmrReport);
+			$Status = 0;
 
 			if (!(isset($xmrReport["hashreport"])) || !(isset($xmrReport["connection"])) ||  !(isset($xmrReport["results"]))) {
 				return "\nData not Set\n";
@@ -291,29 +292,76 @@ if (!class_exists('xmrStak')) {
 			$xmrReport["amdReport"] = explode("\n", $xmrReport["amdReport"]);	
 			$xmrReport["amdReport"] = array_filter($xmrReport["amdReport"], array($this, 'isHashrate'));
 			$xmrReport["amdReport"] = $this->extractHashrate($xmrReport["amdReport"]);
+						
+			
+			$k = 0;						
+			foreach ($this->gpus as &$value) {
+				$thread = [];	
+				if (!empty($xmrReport["amdReport"])) {
+					array_push($thread,array_slice($xmrReport["amdReport"][$k++],1,3));
+					array_push($thread,array_slice($xmrReport["amdReport"][$k++],1,3));
 
-			unset($xmrReport["hashreport"]);
-			
-			
+					if ($thread[0]["10s"] == "(na)" || $thread[1]["10s"] == "(na)") {
+						$value["10s"] = 0;	
+					}else
+					{
+						$value["10s"] = round($thread[0]["10s"] + $thread[1]["10s"]);
+						$value["Status"] = "started";
+					}
 
-			//$xmrReport["cpuReport"] = extractHashrate($xmrReport["cpuReport"]);
-			
-			//var_dump($xmrReport);
-			echo "\n------------------------------------------\n";
-			$gpus = [];
-			$k = 0;
-			if (count($this->gpus)) {
-				$numOfGpu = count($this->gpus);
-			}else
-			{
-				$numOfGpu = 0;
+					if ($value["Status"] == "started") {
+						if ($thread[0]["10s"] == "(na)" || $thread[1]["10s"] == "(na)") {
+						$value["Status"] = "failed";	
+						}
+					}					
+
+					if (count($thread[0]) != 0) {
+						$value["AVG"] = round((array_sum($thread[0]) + array_sum($thread[1])) / count($thread[0]));
+					}else
+					{
+						$value["AVG"] = 0;
+					}
+				}elseif ($value["Status"] == "started") {
+					$value["10s"] = 0;
+					$value["AVG"] = 0;
+					$value["Status"] = "failed";	
+				}
 			}
+			unset($thread, $k);			
+
+			return $Status;
+		}
+
+		public function ReportHashRates()
+		{
+			echo "\n------------------------------------------\n";
+			foreach ($this->gpus as $key => $value) {
+				echo "GPU " . $value['ID'] ." ". $value['Status'] .  ": " . $value['10s'] . "H/s AVG:" . $value['AVG'] ."H/s"  . "\n";
+			}
+			echo "Total: " . array_sum(array_column($this->gpus, 'AVG'))/1000 ."kH/s";
+			echo "\n------------------------------------------\n";			
+		}
+	}
+}
+
+
+
+			
+
+
+/*
+
+
+
+
+
+$k=0;
 			
 			for ($i=0; $i < $numOfGpu; $i++) {
 
 				array_push($gpus,array('ID' => $i+1,'10s' => "start", 'AVG' => "start"));
 				$thread = [];
-				if (!is_null($xmrReport["amdReport"])) {
+				if (!empty($xmrReport["amdReport"])) {
 					array_push($thread,array_slice($xmrReport["amdReport"][$k++],1,3));
 					array_push($thread,array_slice($xmrReport["amdReport"][$k++],1,3));
 
@@ -341,44 +389,6 @@ if (!class_exists('xmrStak')) {
 				}
 				//echo "GPU " . $gpus[$i]['ID'] . ": " . $gpus[$i]['10s'] . "H/s AVG:" . $gpus[$i]['AVG'] ."H/s\n";
 			}
-			unset($k,$i);
-
-			$this->gpus = $gpus;
-			
-			//echo "Total: " . array_sum(array_column($gpus, 'AVG'))/1000 ."kH/s";
-			echo "\n------------------------------------------\n";
-
-			$xmrReport["gpus"] = $gpus;
-
-
-			unset($xmrReport["amdReport"]);
-
-			return $xmrReport;
-		}
-
-		public function ReportHashRates()
-		{
-			foreach ($this->gpus as $key => $value) {
-				echo "GPU " . $value['ID'] . ": " . $value['10s'] . "H/s AVG:" . $value['AVG'] ."H/s\n";
-			}
-			echo "Total: " . array_sum(array_column($this->gpus, 'AVG'))/1000 ."kH/s";
-			
-		}
-	}
-}
-
-
-
-			
-
-
-
-
-
-
-
-
-
 
 
 

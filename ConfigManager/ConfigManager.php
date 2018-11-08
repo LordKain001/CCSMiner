@@ -31,7 +31,7 @@ if (!class_exists('configManager')) {
 			{
 				$this->minerData = json_decode(file_get_contents($this->configFileName), TRUE);
 			}
-			while (is_null($this->minerData["minerUid"]))
+			while (empty($this->minerData["minerUid"]))
 			{
 				echo"Enter Miner-ID:";
 				$this->minerData['minerUid'] = trim(fgets(STDIN)); // reads one line from STDIN
@@ -47,7 +47,6 @@ if (!class_exists('configManager')) {
 		private function retrieveHw()
 		{			
 			
-			$this->getNewGpuInfo();	
 			$this->minerData['ipAdress'] = shell_exec("ip route get 8.8.4.4 | head -1 | awk '{print $7}'");
 			$this->minerData['hostName'] = shell_exec('hostname');
 			$this->getNewGpuInfo();
@@ -55,18 +54,49 @@ if (!class_exists('configManager')) {
 
 		private function getNewGpuInfo()
 		{
-			$gpuInfo = shell_exec('clinfo -l');
+			$this->gpuData = Array();
+
+			echo "ConfigManager: try to get clinfo \n";
+			$gpuInfo = shell_exec('/opt/amdgpu-pro/bin/clinfo');
+			echo "ConfigManager: Done \n";
+
+
+			$gpuInfo = str_replace(' ', '', $gpuInfo);
+			$gpuInfo = str_replace('\t', '', $gpuInfo);
 			$gpuInfo = explode("\n",$gpuInfo);
+			
 
 			foreach ($gpuInfo as &$value) 
 			{
-			   $value = substr($value,12);
+			   $value = trim(preg_replace('/\s+/', ' ', $value));
 			}
-			array_pop($gpuInfo);
-			array_shift($gpuInfo);
 			unset($value);
-			$this->minerData['numOfGpu'] = count($gpuInfo);
+
+			$gpuData["Name"] = array_values(array_filter($gpuInfo, array($this, 'isGpuName')));
+			$gpuData["BoardName"] = array_values(array_filter($gpuInfo, array($this, 'isGpuBoardName')));
+			$gpuData["DeviceTopology"] = array_values(array_filter($gpuInfo, array($this, 'isGpuDeviceTopologyName')));
+			$gpuData["Numberofdevices"] = intval(trim(strstr(implode("",array_filter($gpuInfo, array($this, 'isNumberofdevices')))," ")));		
+
+			
+			$this->minerData['numOfGpu'] = $gpuData["Numberofdevices"];
+
+
+			for ($i=0; $i <$gpuData["Numberofdevices"]; $i++) {
+				$this->gpuData[$i]["ID"] = $i;
+				$this->gpuData[$i]["Name"] = trim(strstr($gpuData["Name"][$i], " "));
+				$this->gpuData[$i]["BoardName"] = trim(strstr($gpuData["BoardName"][$i], " "));
+				$this->gpuData[$i]["DeviceTopology"] = trim(strstr($gpuData["DeviceTopology"][$i], " "));
+				
+			}
+			
+			var_dump($this->gpuData);
+			
+			sleep(10);
+
+
 		}
+
+		
 		private function getMinerConfig()
 		{
 			$url = 'home.ccs.at:8080/GetMinerConfig.php'; 
@@ -109,11 +139,45 @@ if (!class_exists('configManager')) {
 			$this->xmrData['walletAdress'] = $result['WalletAdress'];
 			$this->xmrData['multipleIntesity'] = $result['multipleIntesity'];
 			$this->xmrData['worksize'] = $result['worksize'];
-			$this->xmrData['poolAdress'] = $result['PoolAdress'];	
-			
-			
+			$this->xmrData['poolAdress'] = $result['PoolAdress'];		
 
 		}
+
+		private function isGpuName($value)
+		{
+			$query = "Name:";
+			if(substr( $value, 0, strlen($query) ) === $query)
+			{
+				return true;
+			}
+		}
+		private function isGpuBoardName($value)
+		{
+			$query = "Boardname:";
+			if(substr( $value, 0, strlen($query) ) === $query)
+			{
+				return true;
+			}
+		}
+		private function isGpuDeviceTopologyName($value)
+		{
+			$query = "DeviceTopology:";
+			if(substr( $value, 0, strlen($query) ) === $query)
+			{
+				return true;
+			}
+		}
+
+		private function isNumberofdevices($value)
+		{
+			$query = "Numberofdevices:";
+			if(substr( $value, 0, strlen($query) ) === $query)
+			{
+				return true;
+			}
+		}
+		
+
 	}
 	
 }

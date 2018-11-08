@@ -1,12 +1,35 @@
 <?php
 
 
+
 include "./ConfigManager/ConfigManager.php";
 include "./xmr-stak/startXmrStak.php";
 //include "xmrParser.php";
 
 
-sleep(60);
+
+function Proxy_available()
+{
+   $response = null;
+	system("ping -c 1 google.com", $response);
+	if($response == 0)
+	{
+		return true;
+	}else
+	{
+		return false;
+	}
+
+}
+
+echo "start CCS Miner, check if proxy is availabe";
+while (!Proxy_available()) {
+ 	echo "start CCSMiner, sleep for 60; try to wait for Network \n";
+ 	sleep(10);
+}
+echo"Internet availabe";
+
+
 
 $ConfigManager = new configManager();
 var_dump($ConfigManager);
@@ -136,7 +159,6 @@ $XmrStak->startMining();
 
 		
 while (1) {
-	sleep(60);
    
 	echo "\n------------------------------------------\n";
 	echo "---------------alive----------------------\n";
@@ -173,7 +195,7 @@ if (is_resource($minerAliveProcess["resource"])) {
  	echo "\n------------------------------------------\n";
 	echo "---------------sleep----------------------\n";
 	echo "------------------------------------------\n";
-  	sleep(5);
+  	sleep(60);
 }
 
 ?>
